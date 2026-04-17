@@ -1,0 +1,958 @@
+/* ============================================
+   Design tokens
+   ============================================ */
+:root {
+  --color-primary: #FF6B2B;
+  --color-primary-dark: #E55A1C;
+  --color-cream: #F7F5F0;
+  --color-cream-deep: #EFEAE0;
+  --color-text: #1A1A2E;
+  --color-text-sub: #4A4A5E;
+  --color-gold: #C8A557;
+  --color-gold-light: #E6D2A1;
+  --color-white: #FFFFFF;
+
+  --font-serif: "Noto Serif JP", "Yu Mincho", "YuMincho", serif;
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+
+  --content-max: 720px;
+  --section-py: 80px;
+  --section-py-sm: 56px;
+
+  --radius: 12px;
+  --radius-lg: 20px;
+
+  --shadow-soft: 0 4px 20px rgba(26, 26, 46, 0.08);
+  --shadow-strong: 0 8px 32px rgba(255, 107, 43, 0.25);
+}
+
+/* ============================================
+   Reset / base
+   ============================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--color-text);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+p {
+  line-height: 1.9;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+section {
+  padding: var(--section-py-sm) 24px;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding: var(--section-py) 32px;
+  }
+}
+
+/* ============================================
+   Shared components
+   ============================================ */
+.cta {
+  display: block;
+  max-width: 420px;
+  margin: 32px auto 0;
+  padding: 20px 32px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 999px;
+  letter-spacing: 0.08em;
+  box-shadow: var(--shadow-strong);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.cta::after {
+  content: " →";
+}
+
+.cta:hover,
+.cta:focus {
+  background: var(--color-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(255, 107, 43, 0.35);
+}
+
+@media (min-width: 768px) {
+  .cta {
+    font-size: 20px;
+    padding: 24px 40px;
+  }
+}
+
+/* ============================================
+   1. Hero
+   ============================================ */
+.hero {
+  background:
+    radial-gradient(ellipse at top left, rgba(255, 107, 43, 0.18), transparent 60%),
+    linear-gradient(160deg, #FFE8D6 0%, #FFD4B2 45%, var(--color-cream) 100%);
+  text-align: center;
+  padding: 96px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero h1 {
+  font-size: 40px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--color-text);
+  margin-bottom: 24px;
+}
+
+.hero-sub {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--color-text-sub);
+  margin-bottom: 40px;
+}
+
+.hero-period {
+  font-size: 14px;
+  color: var(--color-text-sub);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  display: inline-block;
+  margin-bottom: 24px;
+  line-height: 1.7;
+}
+
+.hero-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+@media (min-width: 768px) {
+  .hero {
+    padding: 140px 32px 120px;
+  }
+  .hero h1 {
+    font-size: 64px;
+  }
+  .hero-sub {
+    font-size: 20px;
+  }
+  .hero-period {
+    font-size: 15px;
+  }
+  .hero-price {
+    font-size: 22px;
+  }
+}
+
+/* ============================================
+   2. Empathy
+   ============================================ */
+.empathy {
+  background: var(--color-white);
+  max-width: none;
+}
+
+.empathy h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.check-list {
+  max-width: var(--content-max);
+  margin: 0 auto;
+}
+
+.check-list li {
+  position: relative;
+  padding: 16px 16px 16px 52px;
+  font-size: 16px;
+  line-height: 1.7;
+  border-bottom: 1px dashed var(--color-cream-deep);
+}
+
+.check-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 14px;
+  top: 18px;
+  width: 24px;
+  height: 24px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+@media (min-width: 768px) {
+  .empathy h2 {
+    font-size: 32px;
+  }
+  .check-list li {
+    font-size: 17px;
+  }
+}
+
+.empathy-close {
+  max-width: var(--content-max);
+  margin: 40px auto 0;
+  padding: 24px;
+  background: linear-gradient(135deg, #FFF4EC, #FFE8D6);
+  border-radius: var(--radius);
+  text-align: center;
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: 16px;
+  line-height: 1.8;
+}
+
+@media (min-width: 768px) {
+  .empathy-close {
+    font-size: 18px;
+  }
+}
+
+/* ============================================
+   3. What Happens
+   ============================================ */
+.what-happens {
+  background: var(--color-cream);
+  text-align: center;
+}
+
+.what-happens h2 {
+  font-size: 28px;
+  margin-bottom: 40px;
+  color: var(--color-text);
+}
+
+.what-happens p {
+  max-width: var(--content-max);
+  margin: 0 auto 24px;
+  font-size: 16px;
+}
+
+.what-happens .strong {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--color-primary);
+  margin: 32px auto 20px;
+}
+
+.bunshin-list {
+  max-width: 520px;
+  margin: 0 auto 32px;
+  display: grid;
+  gap: 12px;
+}
+
+.bunshin-list li {
+  padding: 18px 24px;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  font-weight: 500;
+  position: relative;
+  padding-left: 52px;
+  text-align: left;
+}
+
+.bunshin-list li::before {
+  content: "✨";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+}
+
+@media (min-width: 768px) {
+  .what-happens h2 {
+    font-size: 40px;
+  }
+  .what-happens p {
+    font-size: 17px;
+  }
+  .what-happens .strong {
+    font-size: 22px;
+  }
+}
+
+/* ============================================
+   4. Timing
+   ============================================ */
+.timing {
+  background: var(--color-white);
+}
+
+.timing h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 48px;
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.timing-block {
+  max-width: var(--content-max);
+  margin: 0 auto 40px;
+  padding: 32px 0;
+  border-top: 1px solid var(--color-cream-deep);
+}
+
+.timing-block:last-child {
+  border-bottom: 1px solid var(--color-cream-deep);
+}
+
+.timing-block p {
+  font-size: 15px;
+  margin-bottom: 20px;
+  line-height: 2;
+}
+
+.timing-block .accent {
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.timing-block .strong {
+  font-size: 18px;
+}
+
+@media (min-width: 768px) {
+  .timing h2 {
+    font-size: 32px;
+  }
+  .timing-block p {
+    font-size: 16px;
+  }
+  .timing-block .strong {
+    font-size: 22px;
+  }
+}
+
+/* ============================================
+   5. Schedule
+   ============================================ */
+.schedule {
+  background: linear-gradient(180deg, var(--color-cream) 0%, #FFF4EC 100%);
+}
+
+.schedule h2 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.schedule-card {
+  max-width: var(--content-max);
+  margin: 0 auto 20px;
+  padding: 24px 28px;
+  background: var(--color-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-soft);
+  border-left: 4px solid var(--color-primary);
+}
+
+.schedule-card h3 {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.schedule-card ul {
+  padding-left: 0;
+}
+
+.schedule-card li {
+  font-size: 14px;
+  padding: 6px 0 6px 20px;
+  position: relative;
+  color: var(--color-text-sub);
+}
+
+.schedule-card li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.schedule-card--pre,
+.schedule-card--follow {
+  background: linear-gradient(135deg, #FFF9E8, var(--color-white));
+  border-left-color: var(--color-gold);
+  position: relative;
+}
+
+.schedule-card--pre::after,
+.schedule-card--follow::after {
+  content: "⭐";
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+@media (min-width: 768px) {
+  .schedule h2 {
+    font-size: 36px;
+  }
+  .schedule-card {
+    padding: 32px 36px;
+  }
+  .schedule-card h3 {
+    font-size: 18px;
+  }
+  .schedule-card li {
+    font-size: 15px;
+  }
+}
+
+/* ============================================
+   6. Bonus (先着5名特典)
+   ============================================ */
+.bonus {
+  background: var(--color-white);
+  text-align: center;
+  position: relative;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(200, 165, 87, 0.1), transparent 30%),
+    radial-gradient(circle at 90% 80%, rgba(255, 107, 43, 0.08), transparent 30%);
+}
+
+.bonus-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-light));
+  color: var(--color-text);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  padding: 8px 20px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(200, 165, 87, 0.3);
+}
+
+.bonus h2 {
+  font-size: 24px;
+  margin-bottom: 32px;
+  max-width: var(--content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bonus p {
+  max-width: var(--content-max);
+  margin: 0 auto 20px;
+  font-size: 15px;
+  line-height: 2;
+}
+
+.bonus ul {
+  max-width: 500px;
+  margin: 24px auto;
+  text-align: left;
+}
+
+.bonus li {
+  padding: 10px 0 10px 32px;
+  position: relative;
+  font-size: 15px;
+}
+
+.bonus li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 22px;
+  height: 22px;
+  background: var(--color-gold);
+  color: var(--color-white);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (min-width: 768px) {
+  .bonus h2 {
+    font-size: 32px;
+  }
+  .bonus p, .bonus li {
+    font-size: 16px;
+  }
+}
+
+/* ============================================
+   7. Price
+   ============================================ */
+.price {
+  background: linear-gradient(180deg, #FFF4EC 0%, var(--color-cream) 100%);
+  text-align: center;
+}
+
+.price h2 {
+  font-size: 26px;
+  margin-bottom: 32px;
+}
+
+.price-card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 28px;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  border: 2px solid var(--color-primary);
+}
+
+.price-amount {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--color-primary);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.price-deadline {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  background: #FFF4EC;
+  padding: 10px 16px;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  display: inline-block;
+}
+
+.price-note {
+  font-size: 13px;
+  color: var(--color-text-sub);
+  line-height: 1.8;
+  margin-top: 4px;
+}
+
+.price-note-small {
+  font-size: 11px;
+  color: var(--color-text-sub);
+  line-height: 1.7;
+  margin-top: 2px;
+  opacity: 0.8;
+}
+
+@media (min-width: 768px) {
+  .price h2 {
+    font-size: 36px;
+  }
+  .price-amount {
+    font-size: 44px;
+  }
+  .price-deadline {
+    font-size: 20px;
+  }
+}
+
+/* ============================================
+   8. FAQ
+   ============================================ */
+.faq {
+  background: var(--color-white);
+}
+
+.faq h2 {
+  font-size: 26px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.faq-item {
+  max-width: var(--content-max);
+  margin: 0 auto 12px;
+  background: var(--color-cream);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: background 0.2s ease;
+}
+
+.faq-item[open] {
+  background: #FFF4EC;
+}
+
+.faq-item summary {
+  padding: 20px 24px 20px 56px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  position: relative;
+  list-style: none;
+  line-height: 1.6;
+  transition: color 0.2s ease;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::before {
+  content: "Q";
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-serif);
+  font-size: 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: var(--color-primary);
+  font-weight: 300;
+  transition: transform 0.2s ease;
+}
+
+.faq-item[open] summary::after {
+  content: "−";
+}
+
+.faq-body {
+  padding: 4px 24px 24px 56px;
+  color: var(--color-text-sub);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.faq-body p {
+  margin-bottom: 12px;
+}
+
+.faq-body ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.faq-body li {
+  padding: 4px 0;
+  list-style: disc;
+}
+
+@media (min-width: 768px) {
+  .faq h2 {
+    font-size: 36px;
+  }
+  .faq-item summary {
+    font-size: 17px;
+  }
+  .faq-body {
+    font-size: 15px;
+  }
+}
+
+/* ============================================
+   9. Profile
+   ============================================ */
+.profile {
+  background: linear-gradient(180deg, var(--color-cream), #FFF4EC);
+  text-align: center;
+}
+
+.profile h2 {
+  font-size: 26px;
+  margin-bottom: 40px;
+}
+
+.profile-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.profile-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 8px 24px rgba(255, 107, 43, 0.25);
+  border: 4px solid var(--color-white);
+}
+
+.profile-text {
+  text-align: left;
+  max-width: 480px;
+}
+
+.profile-name {
+  font-family: var(--font-serif);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 16px;
+}
+
+.profile-text p {
+  font-size: 15px;
+  margin-bottom: 14px;
+  line-height: 1.9;
+}
+
+@media (min-width: 768px) {
+  .profile h2 {
+    font-size: 36px;
+  }
+  .profile-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 48px;
+    text-align: left;
+  }
+  .profile-photo {
+    width: 240px;
+    height: 240px;
+    flex-shrink: 0;
+  }
+  .profile-name {
+    font-size: 28px;
+  }
+  .profile-text p {
+    font-size: 16px;
+  }
+}
+
+/* ============================================
+   10. Footer CTA
+   ============================================ */
+.footer-cta {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #FF8848 100%);
+  color: var(--color-white);
+  text-align: center;
+  padding: 80px 24px;
+}
+
+.footer-cta h2 {
+  font-size: 24px;
+  color: var(--color-white);
+  max-width: var(--content-max);
+  margin: 0 auto 28px;
+  line-height: 1.5;
+}
+
+.footer-cta p {
+  max-width: var(--content-max);
+  margin: 0 auto 20px;
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.footer-cta strong {
+  font-weight: 700;
+  background: linear-gradient(transparent 60%, rgba(255, 255, 255, 0.3) 60%);
+  padding: 0 2px;
+}
+
+.cta-footer {
+  background: var(--color-white);
+  color: var(--color-primary);
+  margin-top: 40px;
+}
+
+.cta-footer:hover,
+.cta-footer:focus {
+  background: var(--color-cream);
+  color: var(--color-primary-dark);
+}
+
+.footer-price {
+  margin-top: 20px;
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+@media (min-width: 768px) {
+  .footer-cta {
+    padding: 120px 32px;
+  }
+  .footer-cta h2 {
+    font-size: 32px;
+  }
+  .footer-cta p {
+    font-size: 17px;
+  }
+}
+
+/* ============================================
+   Site footer
+   ============================================ */
+.site-footer {
+  background: var(--color-text);
+  color: var(--color-cream);
+  text-align: center;
+  padding: 32px 24px;
+  font-size: 13px;
+  opacity: 0.85;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+
+/* Hero: fade-up on page load */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero h1 {
+  animation: heroFadeUp 0.9s ease-out 0.1s both;
+}
+
+.hero-sub {
+  animation: heroFadeUp 0.9s ease-out 0.4s both;
+}
+
+.hero-period {
+  animation: heroFadeUp 0.9s ease-out 0.7s both;
+}
+
+/* Scroll-triggered reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for list items */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.15s; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.25s; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.35s; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.45s; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.55s; }
+.reveal-stagger.is-visible > *:nth-child(7) { transition-delay: 0.65s; }
+.reveal-stagger.is-visible > *:nth-child(8) { transition-delay: 0.75s; }
+
+.reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Soft hover lift on interactive cards */
+.schedule-card,
+.bunshin-list li {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.schedule-card:hover,
+.bunshin-list li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(26, 26, 46, 0.12);
+}
+
+/* Respect user preference: reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+  }
+}
