@@ -1,3 +1,26 @@
+// 価格フェーズ切替: 2026-04-21 00:00 JST 以降は通常価格(¥68,000)に切り替え
+(function () {
+  'use strict';
+
+  const switchTime = new Date('2026-04-21T00:00:00+09:00').getTime();
+
+  // URLクエリで強制切替できる(?phase=early / ?phase=regular): テスト用
+  const forcePhase = new URLSearchParams(window.location.search).get('phase');
+
+  let useRegular = false;
+  if (forcePhase === 'regular') {
+    useRegular = true;
+  } else if (forcePhase === 'early') {
+    useRegular = false;
+  } else {
+    useRegular = Date.now() >= switchTime;
+  }
+
+  if (useRegular) {
+    document.body.classList.add('is-regular');
+  }
+})();
+
 // スクロールに応じて要素をふわっと表示する
 (function () {
   'use strict';
