@@ -105,6 +105,46 @@ section {
   letter-spacing: 0.08em;
   box-shadow: var(--shadow-strong);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.cta::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  transform: skewX(-25deg);
+  animation: ctaShine 4.5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.cta-footer::before {
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 107, 43, 0.35) 50%,
+    transparent 100%
+  );
+}
+
+@keyframes ctaShine {
+  0%, 35% {
+    left: -150%;
+  }
+  65%, 100% {
+    left: 200%;
+  }
 }
 
 .cta::after {
