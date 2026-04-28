@@ -1,23 +1,34 @@
-// 価格フェーズ切替: 2026-04-21 00:00 JST 以降は通常価格(¥68,000)に切り替え
+// 価格フェーズ切替: 3フェーズ
+//  - 早期(¥48,000): 〜2026-04-20 23:59 JST
+//  - 通常(¥68,000): 2026-04-21 00:00 〜 2026-04-28 23:59 JST
+//  - 最終(¥78,000): 2026-04-29 00:00 〜 2026-05-19 23:59 JST
 (function () {
   'use strict';
 
-  const switchTime = new Date('2026-04-21T00:00:00+09:00').getTime();
+  const regularSwitchTime = new Date('2026-04-21T00:00:00+09:00').getTime();
+  const finalSwitchTime   = new Date('2026-04-29T00:00:00+09:00').getTime();
 
-  // URLクエリで強制切替できる(?phase=early / ?phase=regular): テスト用
+  // URLクエリで強制切替: ?phase=early / ?phase=regular / ?phase=final (テスト用)
   const forcePhase = new URLSearchParams(window.location.search).get('phase');
 
-  let useRegular = false;
-  if (forcePhase === 'regular') {
-    useRegular = true;
-  } else if (forcePhase === 'early') {
-    useRegular = false;
+  let phase;
+  if (forcePhase === 'early' || forcePhase === 'regular' || forcePhase === 'final') {
+    phase = forcePhase;
   } else {
-    useRegular = Date.now() >= switchTime;
+    const now = Date.now();
+    if (now >= finalSwitchTime) {
+      phase = 'final';
+    } else if (now >= regularSwitchTime) {
+      phase = 'regular';
+    } else {
+      phase = 'early';
+    }
   }
 
-  if (useRegular) {
+  if (phase === 'regular') {
     document.body.classList.add('is-regular');
+  } else if (phase === 'final') {
+    document.body.classList.add('is-final');
   }
 })();
 

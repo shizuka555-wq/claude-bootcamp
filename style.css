@@ -1001,21 +1001,57 @@ section {
   box-shadow: 0 10px 28px rgba(26, 26, 46, 0.12);
 }
 
-/* Price phase toggle: default shows early, JS switches to regular after 4/21 00:00 JST */
-.phase-regular {
+/* Price phase toggle: 3フェーズ対応
+   - 早期(早割¥48,000): デフォルト表示 / 〜4/20 23:59
+   - 通常(¥68,000): is-regular クラスで表示 / 4/21 00:00〜4/28 23:59
+   - 最終(¥78,000): is-final クラスで表示 / 4/29 00:00〜5/19 23:59 */
+.phase-regular,
+.phase-final {
   display: none;
 }
 
-body.is-regular .phase-early {
+body.is-regular .phase-early,
+body.is-final .phase-early,
+body.is-final .phase-regular {
   display: none;
 }
 
-body.is-regular .phase-regular {
+body.is-regular .phase-regular,
+body.is-final .phase-final {
   display: block;
 }
 
-body.is-regular a.phase-regular {
-  display: block;
+/* Sold-out 表示(満員御礼) */
+.bonus.sold-out {
+  opacity: 0.78;
+}
+
+.bonus.sold-out .bonus-badge {
+  background: linear-gradient(135deg, #999, #777);
+  color: var(--color-white);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.bonus.sold-out h2 s {
+  color: var(--color-text-sub);
+  text-decoration-thickness: 2px;
+}
+
+.bonus.sold-out .sold-out-message {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-primary);
+  background: var(--color-cream);
+  padding: 14px 20px;
+  border-radius: var(--radius);
+  margin: 0 auto 28px;
+  display: inline-block;
+}
+
+@media (min-width: 768px) {
+  .bonus.sold-out .sold-out-message {
+    font-size: 20px;
+  }
 }
 
 /* Respect user preference: reduce motion */
